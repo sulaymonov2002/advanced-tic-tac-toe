@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from "react";
+import "./App.scss";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// import RandomColor from "./hex-btn";
+
+interface AppProps {}
+
+export interface Mode {
+  counter: number;
 }
+
+const App: React.FC<AppProps> = () => {
+  // const { color, generateColor } = RandomColor();
+  const [state, setState] = useState({
+    counter: 0,
+    step: false,
+  });
+
+  const inputDelay = useRef<HTMLInputElement>(null);
+  const inputStep = useRef<HTMLInputElement>(null);
+
+  const counter = (option: number) => {
+    setState({ ...state, step: true });
+    setTimeout(() => {
+      setState({
+        ...state,
+        counter: state.counter + +inputStep.current?.value! * option,
+        step: false,
+      });
+    }, +inputDelay.current?.value! * 1000);
+  };
+
+  return (
+    // <div
+    //   className="App"
+    //   style={{
+    //     backgroundColor: "#" + color,
+    //   }}
+    // >
+    //   <button className="btn" onClick={generateColor}>
+    //     RandomColor
+    //   </button>
+    // </div>
+
+    <div></div>
+  );
+};
 
 export default App;
